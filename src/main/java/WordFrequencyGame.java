@@ -23,7 +23,7 @@ public class WordFrequencyGame {
 
 
     private List<WordInfo> getWordInfos(String sentence) {
-        List<String> words = Arrays.asList(sentence.split(BLANK_SPACE));
+        List<String> words = getWords(sentence);
         List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
 
         List<WordInfo> wordInfos = new ArrayList<>();
@@ -33,6 +33,10 @@ public class WordFrequencyGame {
             wordInfos.add(wordInfo);
         });
         return wordInfos;
+    }
+
+    private List<String> getWords(String sentence) {
+        return Arrays.asList(sentence.split(BLANK_SPACE));
     }
 
     private Map<String,List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
