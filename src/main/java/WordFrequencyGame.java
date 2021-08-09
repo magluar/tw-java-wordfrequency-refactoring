@@ -6,10 +6,11 @@ import java.util.StringJoiner;
 
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
+    public static final Integer ONE = 1;
 
     public String getResult(String sentence){
         if (sentence.split(BLANK_SPACE).length==1) {
-            return sentence + " 1";
+            return sentence + " " + ONE;
         } else {
             try {
                 //split the input string with 1 to n pieces of spaces
@@ -17,12 +18,12 @@ public class WordFrequencyGame {
 
                 List<Input> inputList = new ArrayList<>();
                 for (String word : words) {
-                    Input input = new Input(word, 1);
+                    Input input = new Input(word, ONE);
                     inputList.add(input);
                 }
 
                 //get the map for the next step of sizing the same word
-                Map<String, List<Input>> map =getListMap(inputList);
+                Map<String, List<Input>> map = getListMap(inputList);
 
                 List<Input> list = new ArrayList<>();
                 for (Map.Entry<String, List<Input>> entry : map.entrySet()){
