@@ -3,7 +3,6 @@ import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
-    public static final Integer ONE = 1;
 
     public String getResult(String sentence){
         try {
