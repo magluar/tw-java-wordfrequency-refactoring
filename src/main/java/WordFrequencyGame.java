@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
@@ -20,27 +21,19 @@ public class WordFrequencyGame {
         }
     }
 
+
     private List<WordInfo> getWordInfos(String sentence) {
-        //split the input string with 1 to n pieces of spaces
-        String[] words = sentence.split(BLANK_SPACE);
-        List<WordInfo> wordInfoList = new ArrayList<>();
-        for (String word : words) {
-            WordInfo wordInfo = new WordInfo(word, ONE);
-            wordInfoList.add(wordInfo);
-        }
+        List<String> words = Arrays.asList(sentence.split(BLANK_SPACE));
+        List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
 
-        //get the map for the next step of sizing the same word
-        Map<String, List<WordInfo>> map = getListMap(wordInfoList);
-
-        List<WordInfo> wordMapList = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()){
-            WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
-            wordMapList.add(wordInfo);
-        }
-        wordInfoList = wordMapList;
-        return wordInfoList;
+        List<WordInfo> wordInfos = new ArrayList<>();
+        distinctWords.forEach(distinctWord -> {
+            int count = (int) words.stream().filter(word -> word.equals(distinctWord)).count();
+            WordInfo wordInfo = new WordInfo(distinctWord, count);
+            wordInfos.add(wordInfo);
+        });
+        return wordInfos;
     }
-
 
     private Map<String,List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
         Map<String, List<WordInfo>> map = new HashMap<>();
