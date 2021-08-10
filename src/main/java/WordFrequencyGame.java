@@ -9,15 +9,16 @@ public class WordFrequencyGame {
             List<WordInfo> wordInfoList = getWordInfos(sentence);
             wordInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
-            StringJoiner joiner = new StringJoiner("\n");
-            for (WordInfo word : wordInfoList) {
-                String resultString = word.getValue() + " " +word.getWordCount();
-                joiner.add(resultString);
-            }
-            return joiner.toString();
+            return getResultString(wordInfoList);
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private String getResultString(List<WordInfo> wordInfoList) {
+        StringJoiner joiner = new StringJoiner("\n");
+        wordInfoList.forEach(word -> joiner.add(word.getValue() + " " + word.getWordCount()));
+        return joiner.toString();
     }
 
     private List<WordInfo> getWordInfos(String sentence) {
