@@ -27,7 +27,7 @@ public class WordFrequencyGame {
 
         List<WordInfo> wordInfos = new ArrayList<>();
         distinctWords.forEach(distinctWord -> {
-            int count = (int) words.stream().filter(word -> word.equals(distinctWord)).count();
+            int count = Collections.frequency(words, distinctWord);
             wordInfos.add(new WordInfo(distinctWord, count));
         });
         return wordInfos;
