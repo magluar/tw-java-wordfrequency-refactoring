@@ -7,12 +7,16 @@ public class WordFrequencyGame {
     public String getResult(String sentence){
         try {
             List<WordInfo> generateWordInfos = getWordInfos(sentence);
-            generateWordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+            sortWords(generateWordInfos);
 
             return getResultString(generateWordInfos);
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private void sortWords(List<WordInfo> generateWordInfos) {
+        generateWordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
     }
 
     private String getResultString(List<WordInfo> wordInfoList) {
